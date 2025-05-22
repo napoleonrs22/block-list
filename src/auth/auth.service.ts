@@ -23,7 +23,7 @@ export class AuthService {
         const newUSer = await this.userService.create(email,hash,salt);
         
         const accessToken = await this.jwtService.signAsync({
-            id: newUSer,
+            id: newUSer.id,
             email: newUSer.email,
         });
         return  {accessToken};
@@ -31,7 +31,8 @@ export class AuthService {
 
     async signIn(email:string,password:string){
         const user = await this.userService.finByEmail(email);
-        
+        console.log("User hash:", user);
+
         if(!user){
             throw new  UnauthorizedException()
         }

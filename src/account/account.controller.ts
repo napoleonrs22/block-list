@@ -23,8 +23,9 @@ export class AccountController {
     @Patch()
     @ApiOkResponse({
         type:AccountDto
-    })
+    }) 
     patchAccount(@Body() body:PatchAccountDto,@SessionInfo() session:GetSessionInfoDto):Promise<AccountDto>{
+        console.log('Session Info:', session);
         return this.accountService.patchAccount(session.id,body);
     }
 }
